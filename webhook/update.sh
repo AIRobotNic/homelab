@@ -20,18 +20,11 @@ else
     git -C "$REPO_DIR" pull --ff-only
 fi
 
-
 echo "[Webhook] Current directory:"
 cd "$REPO_DIR/Nicolai_Petrov"
-pwd
-
-ls -la
 
 echo "[Webhook] Building new images..."
-docker-compose build
-
-echo "[Webhook] Starting services..."
-docker-compose up -d
+docker-compose up --build 
 
 echo "[Webhook] Update complete!"
 ~                                 
