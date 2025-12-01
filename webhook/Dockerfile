@@ -1,5 +1,9 @@
 FROM python:3.11-slim
 
+# Создаём пользователя deploy
+RUN useradd -m -s /bin/bash deploy \
+    && usermod -aG root deploy
+
 RUN pip install flask
 
 # Устанавливаем bash, git, ssh, curl, docker
@@ -23,7 +27,10 @@ COPY update.sh .
 RUN chmod +x update.sh
 
 # Папка для SSH ключей
-RUN mkdir -p /root/.ssh
-VOLUME ["/root/.ssh"]
+RUN mkdir -p /deploy/.ssh
+VOLUME ["/deploy/.ssh"]
+
+# Выполняем контейнер от имени deploy
+USER deploy
 
 CMD ["python", "webhook.py"]

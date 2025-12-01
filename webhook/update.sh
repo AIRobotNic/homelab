@@ -8,11 +8,11 @@ echo "[Webhook] Stopping containers..."
 docker-compose down
 
 echo "[Webhook] Performing Git pull..."
-export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+export GIT_SSH_COMMAND="ssh -i /deploy/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
 
-git clone git@github.com:AIRobotNic/neuro_english_tutor.git
+git clone git@github.com:AIRobotNic/homelab.git
 
-cd neuro_english_tutor
+cd homelab
 
 git pull -f
 
