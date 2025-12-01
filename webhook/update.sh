@@ -1,23 +1,26 @@
 #!/bin/bash
 set -e
 
-echo "[Webhook] Starting update.sh ..."
-cd /project
+REPO_DIR="/project"
+REPO_URL="git@github.com:NeuronsUII/neuro_english_tutor.git"
 
-echo "[Webhook] Stopping containers..."
-docker-compose down
+echo "[Webhook] Checking repository..."
 
-echo "[Webhook] Performing Git pull..."
-export GIT_SSH_COMMAND="ssh -i /deploy/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+# Если нет папки → делаем clone
+if [ ! -d "$REPO_DIR/.git" ]; then
+    echo "[Webhook] Repository not found. Cloning..."
+    export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+    git clone "$REPO_URL" "$REPO_DIR"
+else
 
-git clone git@github.com:AIRobotNic/homelab.git
+    echo "[Webhook] Stopping containers..."
+    docker-compose down
+    echo "[Webhook] Repository exists. Pulling latest changes..."
+    export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+    git -C "$REPO_DIR" pull --ff-only
+fi
 
-cd homelab
-
-git pull -f
-
-echo "[Webhook] Sleeping 5 seconds..."
-sleep 5
+cd neuro_english_tutor/Nicolai_Petrov
 
 echo "[Webhook] Building new images..."
 docker-compose build
