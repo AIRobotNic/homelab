@@ -7,5 +7,5 @@ services:
       - "19321:19321"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.ssh/id_ed25519:/deploy/.ssh/id_ed25519:ro
+      - ~/.ssh/id_ed25519:/root/.ssh/id_ed25519:ro
       - ../project:/project
