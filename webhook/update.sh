@@ -32,7 +32,7 @@ ls -la
 
 
 # остановка контейнеров
-docker compose down -v --remove-orphans
+docker-compose down -v --remove-orphans
 
 # Строим и запускаем контейнеры
 echo "[Webhook] Building new images and starting containers..."
