@@ -1,0 +1,11 @@
+services:
+  webhook_receiver:
+    build:
+      context: .
+    container_name: webhook_receiver
+    ports:
+      - "19321:19321"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.ssh/id_ed25519:/root/.ssh/id_ed25519:ro
+      - ../project:/project
