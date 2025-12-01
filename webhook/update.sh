@@ -29,6 +29,11 @@ cd "$DOCKER_DIR"
 echo "[Webhook] Current directory: $(pwd)"
 ls -la
 
+
+
+# остановка контейнеров
+docker compose down -v --remove-orphans
+
 # Строим и запускаем контейнеры
 echo "[Webhook] Building new images and starting containers..."
 docker-compose up -d --build
