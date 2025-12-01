@@ -1,5 +1,9 @@
 FROM python:3.11-slim
 
+# Создаём группу docker с GID хоста
+ARG DOCKER_GID=999
+RUN groupadd -g ${DOCKER_GID} docker
+
 # Создаём пользователя deploy
 RUN useradd -m -s /bin/bash deploy \
     && usermod -aG root deploy
