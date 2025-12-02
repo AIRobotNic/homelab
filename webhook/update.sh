@@ -21,6 +21,8 @@ else
     git -C "$REPO_DIR" reset --hard origin/main
 fi
 
+
+
 # Переходим в директорию с docker-compose.yml
 echo "[Webhook] Moving to docker-compose directory: $DOCKER_DIR"
 cd "$DOCKER_DIR"
@@ -30,9 +32,13 @@ echo "[Webhook] Current directory: $(pwd)"
 ls -la
 
 
-
 # остановка контейнеров
 docker-compose down -v --remove-orphans
+
+
+# Copy .env
+cp env_example .env
+
 
 # Строим и запускаем контейнеры
 echo "[Webhook] Building new images and starting containers..."
