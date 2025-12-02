@@ -2,7 +2,7 @@
 set -e  # остановка при любой ошибке
 
 REPO_DIR="/project"
-REPO_URL="git@github.com:YOUR_USER/YOUR_REPO.git"
+REPO_URL="git@github.com:NeuronsUII/neuro_english_tutor.git"
 DOCKER_DIR="$REPO_DIR/Nicolai_Petrov"
 SSH_KEY="/root/.ssh/id_ed25519"
 
