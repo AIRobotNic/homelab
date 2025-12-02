@@ -8,4 +8,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.ssh/id_ed25519:/root/.ssh/id_ed25519:ro
-      - ./project:/project
+      - ../project:/project
