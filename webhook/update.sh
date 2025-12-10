@@ -3,7 +3,7 @@ set -e  # остановка при любой ошибке
 
 REPO_DIR="/project"
 REPO_URL="git@github.com:NeuronsUII/neuro_english_tutor.git"
-DOCKER_DIR="$REPO_DIR/Nicolai_Petrov"
+DOCKER_DIR="$REPO_DIR/Lingvo_AI"
 SSH_KEY="/root/.ssh/id_ed25519"
 
 echo "[Webhook] Starting update.sh ..."
@@ -27,21 +27,23 @@ fi
 echo "[Webhook] Moving to docker-compose directory: $DOCKER_DIR"
 cd "$DOCKER_DIR"
 
+
 # Логи для проверки
 echo "[Webhook] Current directory: $(pwd)"
 ls -la
 
-
 # остановка контейнеров
 docker-compose down -v --remove-orphans
-
 
 # Copy .env
 cp env_example .env
 
+docker-compose build base  --no-cache
 
 # Строим и запускаем контейнеры
 echo "[Webhook] Building new images and starting containers..."
-docker-compose up -d --build
+# docker-compose up -d --build
+docker-compose build --no-cache
+docker-compose up
 
 echo "[Webhook] Update complete!"
